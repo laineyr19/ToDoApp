@@ -1,4 +1,4 @@
-8from flask import Flask, render_template, redirect, url_for, flash
+from flask import Flask, render_template, redirect, url_for, flash
 from flask import g
 from flask import Response
 from flask import request
@@ -55,7 +55,7 @@ def saving_event():
     starttimestamp=datetime.strptime(startdate + " " + starthour + ":" + startminute + startampm,'%m/%d/%Y %I:%M%p')
     #starttimestamp=datetime.strptime(startdate + " " + starthour + ":" + startminute + " " + startampm, '%m/%d/%Y %I:%M %p')
     return datetime.now()
-   
+
 if __name__ == "__main__":
   app.run(debug=True)
   
