@@ -47,15 +47,19 @@ def saving_event():
     starthour=request.form.get("starthour")
     startminute=request.form.get("startminute")
     startampm=request.form.get("startampm")
+    enddate=request.form.get("enddate")
     endhour=request.form.get("endhour")
     endminute=request.form.get("endminute")
     endampm=request.form.get("endampm")
     category=request.form.get("category")
+    starttimestamp=datetime.strptime(startdate + " " + starthour + ":" + startminute + startampm,"%m/%d/%Y %I:%M%p")
+    endtimestamp=datetime.strptime(enddate + " " + endhour + ":" + endminute + endampm,"%m/%d/%Y %I:%M%p")
     import pdb; pdb.set_trace()
-    starttimestamp=datetime.strptime(startdate + " " + starthour + ":" + startminute + startampm,'%m/%d/%Y %I:%M%p')
     #starttimestamp=datetime.strptime(startdate + " " + starthour + ":" + startminute + " " + startampm, '%m/%d/%Y %I:%M %p')
-    return datetime.now()
-
+    insert="INSERT INTO ToDodb.todos(title, description, starttime, endtime, categoryid) VALUES ('{title}', '{description}', '{starttimestamp}', '{endtimestamp}', '{category}')".format(
+                                                                                                                                                                               title=title, description=description, starttimestamp=starttimestamp, endtimestamp=endtimestamp, category=category)
+    g.cursor.execute(insert)
+    g.conn.commit()
 if __name__ == "__main__":
   app.run(debug=True)
   
