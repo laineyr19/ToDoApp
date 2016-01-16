@@ -60,6 +60,12 @@ def saving_event():
                                                                                                                                                                                title=title, description=description, starttimestamp=starttimestamp, endtimestamp=endtimestamp, category=category)
     g.cursor.execute(insert)
     g.conn.commit()
+    
+    
+@app.route("/displayevent", methods=['GET'])
+def displayevent():
+    return render_template('displayevent.html')
+    
 if __name__ == "__main__":
   app.run(debug=True)
   
