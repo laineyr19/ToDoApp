@@ -27,7 +27,7 @@ html[xmlns] .clearfix {
 h4 {
   width: 75%;
   text-align: center;
-  font-family: 'Droid Sans Mono';
+  font-family: 'Century Gothic';
   font-weight: normal;
   color: white;
   font-size: 14px;
@@ -41,7 +41,7 @@ h5 {
 }
 p {
   text-align: center;
-  font-family: 'Droid Sans Mono';
+  font-family: 'Century Gothic';
   margin: 3em auto 1em auto;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
@@ -56,8 +56,8 @@ p {
 }
 .cal1 {
   margin: 30px auto;
-  max-width: 600px;
-  font-family: 'Droid Sans Mono';
+  max-width: 700px;
+  font-family: 'Century Gothic';
   font-size: 14px;
 }
 .cal1 .clndr .clndr-controls {
@@ -124,7 +124,7 @@ p {
 .cal1 .clndr .clndr-table .header-days {
   height: 30px;
   font-size: 10px;
-  background: #0D70A6;
+  background: #737373;
 }
 .cal1 .clndr .clndr-table .header-days .header-day {
   vertical-align: middle;
@@ -137,7 +137,7 @@ p {
   border-right: 1px solid #000000;
 }
 .cal1 .clndr .clndr-table tr {
-  height: 85px;
+  height: 100px;
 }
 .cal1 .clndr .clndr-table tr td {
   vertical-align: top;
@@ -153,11 +153,11 @@ p {
 }
 .cal1 .clndr .clndr-table tr .day.today,
 .cal1 .clndr .clndr-table tr .day.my-today {
-  background: #9AD6E3;
+  background: #b3ccff;
 }
 .cal1 .clndr .clndr-table tr .day.today:hover,
 .cal1 .clndr .clndr-table tr .day.my-today:hover {
-  background: #72c6d8;
+  background: #9AD6E3;
 }
 .cal1 .clndr .clndr-table tr .day.today.event,
 .cal1 .clndr .clndr-table tr .day.my-today.event {
@@ -181,7 +181,7 @@ p {
 .cal1 .clndr .clndr-table tr .day .day-contents {
   box-sizing: border-box;
   padding: 8px;
-  font-size: 12px;
+  font-size: 10px;
   text-align: right;
 }
 .cal1 .clndr .clndr-table tr .empty,
@@ -192,13 +192,13 @@ p {
   border-top: 1px solid #000000;
   width: 100%;
   height: inherit;
-  background: #eee;
+  background: #DEE0E0;
 }
 .cal1 .clndr .clndr-table tr .empty:hover,
 .cal1 .clndr .clndr-table tr .adjacent-month:hover,
 .cal1 .clndr .clndr-table tr .my-empty:hover,
 .cal1 .clndr .clndr-table tr .my-adjacent-month:hover {
-  background: #ddd;
+  background: #BFBFBF;
 }
 .cal1 .clndr .clndr-table tr .empty:last-child,
 .cal1 .clndr .clndr-table tr .adjacent-month:last-child,
@@ -217,7 +217,7 @@ p {
 .cal2 {
   max-width: 177px;
   margin: 30px auto;
-  font-family: 'Droid Sans Mono';
+  font-family: 'Century Gothic';
 }
 .cal2 .clndr .clndr-controls {
   display: block;
@@ -317,7 +317,7 @@ p {
 .cal3 {
   max-width: 354px;
   margin: 0 auto;
-  font-family: 'Droid Sans Mono';
+  font-family: 'Century Gothic';
 }
 .cal3 .cal {
   float: left;
