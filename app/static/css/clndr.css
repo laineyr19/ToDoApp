@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Droid+Sans+Mono);
+@import url(https://fonts.googleapis.com/css?family=Josefin+Sans);
 .clearfix:after {
   content: ".";
   display: block;
@@ -70,6 +71,8 @@ p {
   float: left;
   width: 33%;
   text-align: center;
+  font-family: 'Josefin Sans';
+  font-size: 30px; 
 }
 .cal1 .clndr .clndr-controls .clndr-control-button {
   float: left;
@@ -149,7 +152,7 @@ p {
   height: inherit;
 }
 .cal1 .clndr .clndr-table tr .day:hover {
-  background: #eee;
+  background: pink;
 }
 .cal1 .clndr .clndr-table tr .day.today,
 .cal1 .clndr .clndr-table tr .day.my-today {
@@ -179,10 +182,17 @@ p {
   border-right: 1px solid #000000;
 }
 .cal1 .clndr .clndr-table tr .day .day-contents {
-  box-sizing: border-box;
-  padding: 8px;
-  font-size: 10px;
-  text-align: right;
+	box-sizing: border-box;
+	padding: 12px 0px 0px 0px;
+	font-size: 10px;
+	text-align: center;
+	background: #E9C6F7;
+	width: 40px;
+	height: 40px;
+	border-radius: 20px 20px 20px 20px;
+	display: block;
+	color: #628057;
+	font-weight: 600;
 }
 .cal1 .clndr .clndr-table tr .empty,
 .cal1 .clndr .clndr-table tr .adjacent-month,
@@ -198,7 +208,7 @@ p {
 .cal1 .clndr .clndr-table tr .adjacent-month:hover,
 .cal1 .clndr .clndr-table tr .my-empty:hover,
 .cal1 .clndr .clndr-table tr .my-adjacent-month:hover {
-  background: #BFBFBF;
+  background: blue;
 }
 .cal1 .clndr .clndr-table tr .empty:last-child,
 .cal1 .clndr .clndr-table tr .adjacent-month:last-child,
@@ -425,6 +435,14 @@ p {
   -ms-user-select: none;
   /* IE10+ */
 }
+
+.clndr-next-button,
+.clndr-previous-button {
+	/*text-transform: uppercase;*/
+	font-variant: small-caps;
+	font-style: italic;
+}
+	
 .clndr-next-button.inactive,
 .clndr-previous-button.inactive,
 .clndr-next-year-button.inactive,

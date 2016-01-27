@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, url_for, flash
 from flask import g
 from flask import Response
 from flask import request
+from flask import jsonify
 import json
 import MySQLdb
 from datetime import datetime
@@ -54,7 +55,6 @@ def saving_event():
     category=request.form.get("category")
     starttimestamp=datetime.strptime(startdate + " " + starthour + ":" + startminute + startampm,"%m/%d/%Y %I:%M%p")
     endtimestamp=datetime.strptime(enddate + " " + endhour + ":" + endminute + endampm,"%m/%d/%Y %I:%M%p")
-    import pdb; pdb.set_trace()
     #starttimestamp=datetime.strptime(startdate + " " + starthour + ":" + startminute + " " + startampm, '%m/%d/%Y %I:%M %p')
     insert="INSERT INTO ToDodb.todos(title, description, starttime, endtime, categoryid) VALUES ('{title}', '{description}', '{starttimestamp}', '{endtimestamp}', '{category}')".format(
                                                                                                                                                                                title=title, description=description, starttimestamp=starttimestamp, endtimestamp=endtimestamp, category=category)
@@ -65,6 +65,16 @@ def saving_event():
 @app.route("/displayevent", methods=['GET'])
 def displayevent():
     return render_template('displayevent.html')
+
+@app.route("/getevents", methods=['GET'])
+def selectmonth():
+    import pdb;pdb.set_trace()
+    starttime="2016-01-01"
+    endtime="2016-01-20"
+    gettingevents = query_db("SELECT title, description, categoryid from todos where starttime > '{starttime}' and starttime < '{endtime}'".format(starttime=starttime, endtime=endtime))
+    #return jsonify(gettingevents)
+    return gettingevents
+    
     
 if __name__ == "__main__":
   app.run(debug=True)
