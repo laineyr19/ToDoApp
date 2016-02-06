@@ -1,17 +1,60 @@
 <!DOCTYPE html>
 <html>
-    <head>
-       <link rel="stylesheet" href="../static/css/todostyles.css">
-       <link rel="stylesheet" href="../static/css/clndr.css">
-    </head>
-    <body>
-    	<div class="cal1">
-    		<div id="calendar"></div>
-    	</div>
-    	<script src="../static/js/underscore.js"></script>
-    	<script src="../static/js/moment.js"></script>
-    	<script src="../static/js/jquery.js"></script>
-    	<script src="../static/js/clndr.js"></script>
-        <script>$('#calendar').clndr();</script>
-    </body>
+	<head>
+		<link rel="stylesheet" href="../static/css/todostyles.css">
+		<link rel="stylesheet" href="../static/css/clndr.css">
+	</head>
+	<body>
+		<div class="cal1">
+			<div id="calendar"></div>
+		</div>
+		<script src="../static/js/underscore.js"></script>
+		<script src="../static/js/moment.js"></script>
+		<script src="../static/js/jquery.js"></script>
+		<script src="../static/js/clndr.js"></script>
+		<script>
+			function receivingevents() {
+				var d = new Date();
+				var begindate = d.getFullYear() + '/' + d.getMonth() + 1 + '/' + '01';
+				var enddate = d.getFullYear() + '/' + d.getMonth() + 2 + '/' + '01';
+				$.ajax({
+					url : 'http://127.0.0.1:5000/getevents',
+					type : 'get',
+					data : {
+						begindate : begindate,
+						enddate : enddate,
+					},
+					success : function(data) {
+						debugger;
+						displayeventdata(data);
+					}
+				});
+			}
+			function displayeventdata(resp){
+				$('#calendar').clndr({
+                events: resp.data,
+                clickEvents: {
+                    click: function (target) {
+                        console.log(target.events);
+                        for (var i = 0; i < target.events.length; i++) {
+                            var item = target.events[i];
+                            console.log(item.title, item.date, item.description);
+                        }
+                    },
+                    onMonthChange: function (month) {
+                        var nextMonth = month.format('YYYY/MM/01');
+                        var previousMonth = month.subtract(1, 'months').format('YYYY/MM/01');
+                        console.log(previousMonth, nextMonth);
+                        //do AJAX call to get month data
+                    }
+                },
+                doneRendering: function () {
+                    console.log('this would be a fine place to attach custom event handlers.');
+                }
+            });
+			}
+			//$('#calendar').clndr();
+			receivingevents();
+		</script>
+	</body>
 </html>

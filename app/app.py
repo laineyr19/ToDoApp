@@ -68,12 +68,13 @@ def displayevent():
 
 @app.route("/getevents", methods=['GET'])
 def selectmonth():
-    import pdb;pdb.set_trace()
-    starttime="2016-01-01"
-    endtime="2016-01-20"
-    gettingevents = query_db("SELECT title, description, categoryid from todos where starttime > '{starttime}' and starttime < '{endtime}'".format(starttime=starttime, endtime=endtime))
-    #return jsonify(gettingevents)
-    return gettingevents
+    begin = request.args['begindate']
+    end = request.args['enddate']
+    gettingevents = query_db("SELECT title, description, starttime, categoryid from todos where starttime > '{starttime}' and starttime < '{endtime}'".format(starttime=begin, endtime=end))
+    for event in gettingevents:
+        starttime=event['starttime']
+        event['date']=starttime.strftime('%Y-%m-%d %I:%M %p')
+    return jsonify({'data': gettingevents})
     
     
 if __name__ == "__main__":
