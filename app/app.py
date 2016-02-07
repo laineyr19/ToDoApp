@@ -70,7 +70,7 @@ def displayevent():
 def selectmonth():
     begin = request.args['begindate']
     end = request.args['enddate']
-    gettingevents = query_db("SELECT title, description, starttime, categoryid from todos where starttime > '{starttime}' and starttime < '{endtime}'".format(starttime=begin, endtime=end))
+    gettingevents = query_db("SELECT title, description, starttime, endtime, categoryid from todos where starttime > '{starttime}' and starttime < '{endtime}'".format(starttime=begin, endtime=end))
     for event in gettingevents:
         starttime=event['starttime']
         event['date']=starttime.strftime('%Y-%m-%d %I:%M %p')

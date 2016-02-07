@@ -7,3 +7,12 @@ textarea {
 	width: 200px;
 	height: 50px;
 }
+
+.ui-dialog .ui-dialog-title {
+	font-family: 'Josefin Sans';
+}
+
+#dialog p {
+	font-family: 'Josefin Sans';
+}
+
