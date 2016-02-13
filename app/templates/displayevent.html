@@ -1,44 +1,43 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<link rel="stylesheet" href="../static/css/todostyles.css">
-		<link rel="stylesheet" href="../static/css/clndr.css">
-		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0-beta.1/themes/smoothness/jquery-ui.css">
-	</head>
-	<body>
-		<a href="addevent" class="button">Add Event</a>
-		
-		<div class="cal1">
-			<div id="calendar"></div>
-		</div>
-		<div id="dialog" title="Today's Events">
+<head>
+    <link rel="stylesheet" href="../static/css/todostyles.css">
+    <link rel="stylesheet" href="../static/css/clndr.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0-beta.1/themes/smoothness/jquery-ui.css">
+</head>
+<body>
+<a href="addevent" class="button">Add Event</a>
 
-		</div>
-		<script src="../static/js/underscore.js"></script>
-		<script src="../static/js/moment.js"></script>
-		<script src="../static/js/jquery.js"></script>
-		<script src="../static/js/clndr.js"></script>
-		<script src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"></script>
+<div class="cal1">
+    <div id="calendar"></div>
+</div>
+<div id="dialog" title="Today's Events">
 
-		<script type="txt/template" id="eventcontent">
-			<p>Title: {title}</p>
-			<p>Description: {description}</p>
-			<p>Start Time: {starttime}</p>
-			<p>End Time: {endtime}</p>
-			
-			
-			<a href="addevent" class="buttontwo">Edit</a>
-			
-			<!-- set currentevent to the event that has the edit button attatched to it. 
-				when edit button  is clicked, go to addevent page and populate it with the right stuff:
-					title=title, desc=desc, etc from the data base, use var eventdetails (?)					
-					-->
-			
-		<script>
-			function receivingevents() {
-				var d = new Date();
-				var begindate = d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + '01';
-				var enddate = d.getFullYear() + '/' + (d.getMonth() + 2) + '/' + '01';
+</div>
+<script src="../static/js/underscore.js"></script>
+<script src="../static/js/moment.js"></script>
+<script src="../static/js/jquery.js"></script>
+<script src="../static/js/clndr.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"></script>
+
+<script type="txt/template" id="eventcontent">
+    <p>Title: {title}</p>
+    <p>Description: {description}</p>
+    <p>Start Time: {starttime}</p>
+    <p>End Time: {endtime}</p>
+
+
+    <a href="addevent?id={eventid}" class="buttontwo">Edit</a>
+
+    <!-- set currentevent to the event that has the edit button attatched to it.
+        when edit button  is clicked, go to addevent page and populate it with the right stuff:
+            title=title, desc=desc, etc from the data base, use var eventdetails (?)
+            -->
+</script>
+<script>
+			var firstpage = true;
+			var calendar;
+			function receivingevents(begindate, enddate) {
 				$.ajax({
 					url : 'http://127.0.0.1:5000/getevents',
 					type : 'get',
@@ -53,47 +52,64 @@
 			}
 
 			function displayeventdata(resp) {
-				$('#calendar').clndr({
-					events : resp.data,
-					clickEvents : {
-						click : function(target) {
-							if (target.events.length == 0){
-								return;
-							}
-							
+				if (firstpage == true){
+				    firstpage = false;
+                    calendar = $('#calendar').clndr({
+                        events : resp.data,
+                        clickEvents : {
+                            click : function(target) {
+                                if (target.events.length == 0){
+                                    return;
+                                }
 
-							var storeevents = "";
 
-							for (var i = 0; i < target.events.length; i++) {
-								var info = target.events[i];
-								//console.log(info.description, info.title, info.starttime, info.endtime, info.categoryid);
-								var eventcontent = $("#eventcontent").html();
-								var eventdetails = eventcontent.replace('{title}', info.title).replace('{description}', info.description).replace('{starttime}', info.starttime).replace('{endtime}', info.endtime);
-								storeevents = "<hr>" + eventdetails + storeevents;
-							}
-							storeevents=storeevents+"<hr>";
-							$("#dialog").html(storeevents);
-							$("#dialog").dialog({
-								width : 500,
-								modal : true
-							});
 
-						},
-						onMonthChange : function(month) {
-							var nextMonth = month.format('YYYY/MM/01');
-							var previousMonth = month.subtract(1, 'months').format('YYYY/MM/01');
-							console.log(previousMonth, nextMonth);
-							//do AJAX call to get month data
-						}
-					},
-					doneRendering : function() {
-						console.log('this would be a fine place to attach custom event handlers.');
-					}
-				});
+                                var storeevents = "";
+
+                                for (var i = 0; i < target.events.length; i++) {
+                                    var info = target.events[i];
+                                    console.log(info, info.description, info.title, info.starttime, info.endtime, info.categoryid, info.eventid);
+                                    var eventcontent = $("#eventcontent").html();
+                                    var eventdetails = eventcontent
+                                    .replace('{title}', info.title)
+                                    .replace('{description}', info.description)
+                                    .replace('{starttime}', info.starttime)
+                                    .replace('{endtime}', info.endtime)
+                                    .replace('{eventid}', info.id);
+                                    storeevents = "<hr>" + eventdetails + storeevents;
+                                }
+                                storeevents=storeevents+"<hr>";
+                                $("#dialog").html(storeevents);
+                                $("#dialog").dialog({
+                                    width : 500,
+                                    modal : true
+                                });
+
+                            },
+                            onMonthChange : function(month) {
+                                var begin = month.format('YYYY/MM/01');
+                                var end = moment(month)
+                                end = month.add(1, 'months').format('YYYY/MM/01');
+                                console.log(begin, end);
+                                receivingevents(begin, end);
+                                //do AJAX call to get month data
+                            }
+                        },
+                        doneRendering : function() {
+                            console.log('this would be a fine place to attach custom event handlers.');
+                        }
+                    });
+				}
+				else {
+                    calendar.setEvents(resp.data);
+				}
 			}
 
 			//$('#calendar').clndr();
-			receivingevents();
+			var d = new Date();
+			var begindate = d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + '01';
+			var enddate = d.getFullYear() + '/' + (d.getMonth() + 2) + '/' + '01';
+			receivingevents(begindate, enddate);
 
 			$(document).ready(function() {
 				$(document).scroll(function(e) {
@@ -117,6 +133,7 @@
 					}
 				});
 			});
-		</script>
-	</body>
+
+</script>
+</body>
 </html>

@@ -1,4 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, flash
+from flask import Flask, render_template, redirect, url_for, flash
 from flask import g
 from flask import Response
 from flask import request
@@ -37,8 +38,14 @@ def hello():
   
 @app.route("/addevent", methods=['GET'])
 def adding_event():
+    id = request.args.get('id')
     category = query_db("SELECT * FROM ToDodb.event_type")
-    return render_template('add_event.html', resp={'category':category})
+    if id is None:
+        return render_template('add_event.html', resp={'category':category})
+    else:
+        existingevent = query_db("SELECT * FROM ToDodb.todos where id = '{id}'".format(id=id))
+        return render_template('editevent.html', resp={'existingevent':existingevent[0], 'category':category})
+
 
 @app.route("/saveevent", methods=['POST'])
 def saving_event():
@@ -70,7 +77,8 @@ def displayevent():
 def selectmonth():
     begin = request.args['begindate']
     end = request.args['enddate']
-    gettingevents = query_db("SELECT title, description, starttime, endtime, categoryid from todos where starttime > '{starttime}' and starttime < '{endtime}'".format(starttime=begin, endtime=end))
+    gettingevents = query_db("SELECT title, description, starttime, endtime, categoryid, id from todos where "
+                             "starttime > '{starttime}' and starttime < '{endtime}'".format(starttime=begin, endtime=end))
     for event in gettingevents:
         starttime=event['starttime']
         event['date']=starttime.strftime('%Y-%m-%d %I:%M %p')

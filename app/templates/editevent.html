@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <link rel="stylesheet" href="../static/css/todostyles.css">
+       <link rel="stylesheet" href="../static/css/jquery-ui.min.css">
+    </head>
+    <body>
+        <form action="saveevent" method="post">
+            <label>title</label>
+            <input type="text" value="{{resp['existingevent'].get('title')}}" name="title">
+
+            <label>description</label>
+            <textarea name="description">{{resp['existingevent'].get('description')}}</textarea>
+
+            <label>start date</label>
+            <input type="text" name="startdate" id="startdate">
+
+            <label>start hour</label>
+            <select name="starthour">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            </select>
+
+
+            <label>start minute</label>
+            <select name="startminute">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+            <option value="35">35</option>
+            <option value="40">40</option>
+            <option value="45">45</option>
+            <option value="50">50</option>
+            <option value="55">55</option>
+            <option value="60">60</option>
+            </select>
+
+
+            <label>start AM/PM</label>
+            <select name="startampm">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+            </select>
+
+            <label>end date</label>
+            <input type="text" name="enddate" id="enddate">
+
+            <label>end hour</label>
+            <select name="endhour">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            </select>
+
+            <label>end minute</label>
+            <select name="endminute">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+            <option value="35">35</option>
+            <option value="40">40</option>
+            <option value="45">45</option>
+            <option value="50">50</option>
+            <option value="55">55</option>
+            <option value="60">60</option>
+            </select>
+
+            <label>end AM/PM</label>
+            <select name="endampm">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+            </select>
+
+            <label>category</label>
+            <select name="category">
+                {% for event_type in resp['category'] %}
+                    {% if event_type['id']==resp['existingevent'].get('categoryid') %}
+                        <option value="{{event_type['id']}}" selected>{{event_type['name']}}</option>
+                    {% else %}
+                        <option value="{{event_type['id']}}">{{event_type['name']}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <input type="submit">
+        </form>
+        <script src="../static/js/jquery.js"></script>
+        <script src="../static/js/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+        <script>
+        	$(function() {
+    		$( "#startdate" ).datepicker();
+    		$( "#enddate" ).datepicker();
+  			});
+  		</script>
+    </body>
+</html>
