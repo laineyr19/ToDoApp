@@ -1,6 +1,45 @@
 @import url(http://fonts.googleapis.com/css?family=Droid+Sans+Mono);
 @import url(https://fonts.googleapis.com/css?family=Josefin+Sans);
 
+.button {
+	font-family: 'Josefin Sans';
+	padding: 10px 10px 10px 10px;
+	color: black;
+	font-size: 12px;
+}
+
+.buttontwo {
+	font-family: 'Josefin Sans';
+	color: black;
+	font-size: 17px;
+}
+
+.ui-dialog-titlebar.ui-corner-all.ui-widget-header.ui-helper-clearfix.ui-draggable-handle
+	{
+	border: 1px solid #9DBCC7;
+	background: #C7F1FF;
+	color: #696969;
+	font-weight: bold;
+	font-family: 'Joesfin Sans';
+
+}
+
+/*.ui-widget-header {
+	border: 1px solid #9DBCC7;
+	background: #C7F1FF;
+	color: #696969;
+	font-weight: bold;
+	font-family: 'Joesfin Sans';
+
+}*/
+
+.ui-widget-header {
+	font-family: 'Josefin Sans';
+	font-size: 17px;
+	padding: 8px 0px 6px 0px;
+
+}
+
 .left-align {
   text-align: left;
 }
@@ -10,7 +49,7 @@
 .cal1 {
   margin: 30px auto;
   max-width: 700px;
-  font-family: 'Century Gothic';
+  font-family: 'Josefin Sans';
   font-size: 14px;
 }
 .cal1 .clndr .clndr-controls {
@@ -392,7 +431,6 @@
 .clndr-previous-button {
 	/*text-transform: uppercase;*/
 	font-variant: small-caps;
-	font-style: italic;
 }
 	
 .clndr-next-button.inactive,
