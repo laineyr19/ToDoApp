@@ -1,429 +1,479 @@
 <!DOCTYPE html>
 <html>
-    <head>
-       <link rel="stylesheet" href="../static/css/todostyles.css">
-       <link rel="stylesheet" href="../static/css/jquery-ui.min.css">
-    </head>
-    <body>
-        <form action="editevent" method="post">
-            <label>title</label>
-            <input type="text" value="{{resp['existingevent'].get('title')}}" name="title">
+<head>
+    <link rel="stylesheet" href="../static/css/todostyles.css">
+    <link rel="stylesheet" href="../static/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="../static/css/clndr.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+</head>
+<body>
+
+<header>
+    <h1>Lainey's Page</h1>
+    <nav>
+        <ul class="nav nav-pills">
+            <li>
+                <a href="displayevent">Calendar</a>
+            </li>
+            <li>
+                <a href="addevent">Add Event</a>
+            </li>
+            <li>
+                <a href="monthlyevents">See Events</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<br>
+
+<form class="form-inline" action="editevent" method="post">
+
+    <input type="hidden" value="{{resp['existingevent'].get('id')}}" name="id">
+
+    <label>Title</label>
+    <br>
+    <input type="text" value="{{resp['existingevent'].get('title')}}" name="title">
+
+    <br>
+
+    <label>Description</label>
+    <br>
+    <textarea name="description">{{resp['existingevent'].get('description')}}</textarea>
+
+    <br>
+
+    <label>Start Date</label>
+    <br>
+    <input type="text" name="startdate" id="startdate" value="{{resp['existingevent'].get('startdate')}}">
+
+    <br>
+
+    <div class="column">
+        <label>Start Hour</label>
+        <select name="starthour">
+            {% if resp['existingevent'].get('starthour') == 1 %}
+            <option value="1" selected>1</option>
+            {% else %}
+            <option value="1">1</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('starthour') == 2 %}
+            <option value="2" selected>2</option>
+            {% else %}
+            <option value="2">2</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('starthour') == 3 %}
+            <option value="3" selected>3</option>
+            {% else %}
+            <option value="3">3</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('starthour') == 4 %}
+            <option value="4" selected>4</option>
+            {% else %}
+            <option value="4">4</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('starthour') == 5 %}
+            <option value="5" selected>5</option>
+            {% else %}
+            <option value="5">5</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('starthour') == 6 %}
+            <option value="6" selected>6</option>
+            {% else %}
+            <option value="6">6</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('starthour') == 7 %}
+            <option value="7" selected>7</option>
+            {% else %}
+            <option value="7">7</option>
+            {% endif %}
 
-            <label>description</label>
-            <textarea name="description">{{resp['existingevent'].get('description')}}</textarea>
 
+            {% if resp['existingevent'].get('starhour') == 8 %}
+            <option value="8" selected>8</option>
+            {% else %}
+            <option value="8">8</option>
+            {% endif %}
 
 
-            <label>start date</label>
-            <input type="text" name="startdate" id="startdate" value="{{resp['existingevent'].get('date')}}">
+            {% if resp['existingevent'].get('starthour') == 9 %}
+            <option value="9" selected>9</option>
+            {% else %}
+            <option value="9">9</option>
+            {% endif %}
 
 
-            <label>start hour</label>
-            <select name="starthour">
-                {% if resp['existingevent'].get('hour') == 1 %}
-                    <option value="1" selected>1</option>
-                {% else %}
-                    <option value="1">1</option>
-                {% endif %}
+            {% if resp['existingevent'].get('starthour') == 10 %}
+            <option value="10" selected>10</option>
+            {% else %}
+            <option value="10">10</option>
+            {% endif %}
 
 
-                {% if resp['existingevent'].get('hour') == 2 %}
-                    <option value="2" selected>2</option>
-                {% else %}
-                    <option value="2">2</option>
-                {% endif %}
+            {% if resp['existingevent'].get('starthour') == 11 %}
+            <option value="11" selected>11</option>
+            {% else %}
+            <option value="11">11</option>
+            {% endif %}
 
 
-                {% if resp['existingevent'].get('hour') == 3 %}
-                    <option value="3" selected>3</option>
-                {% else %}
-                    <option value="3">3</option>
-                {% endif %}
+            {% if resp['existingevent'].get('starthour') == 12 %}
+            <option value="12" selected>12</option>
+            {% else %}
+            <option value="12">12</option>
+            {% endif %}
 
+        </select>
+    </div>
+    <div class="column">
+        <label>Start Minute</label>
+        <select name="startminute">
+            {% if resp['existingevent'].get('startminutes') == 0 %}
+            <option value="0" selected>00</option>
+            {% else %}
+            <option value="0">00</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('startminutes') == 5 %}
+            <option value="5" selected>05</option>
+            {% else %}
+            <option value="5">05</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('startminutes') == 10 %}
+            <option value="10" selected>10</option>
+            {% else %}
+            <option value="10">10</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('startminutes') == 15 %}
+            <option value="15" selected>15</option>
+            {% else %}
+            <option value="15">15</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('startminutes') == 20 %}
+            <option value="20" selected>20</option>
+            {% else %}
+            <option value="20">20</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('startminutes') == 25 %}
+            <option value="25" selected>25</option>
+            {% else %}
+            <option value="25">25</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('startminutes') == 30 %}
+            <option value="30" selected>30</option>
+            {% else %}
+            <option value="30">30</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('startminutes') == 35 %}
+            <option value="35" selected>35</option>
+            {% else %}
+            <option value="35">35</option>
+            {% endif %}
 
-                {% if resp['existingevent'].get('hour') == 4 %}
-                    <option value="4" selected>4</option>
-                {% else %}
-                    <option value="4">4</option>
-                {% endif %}
+
+            {% if resp['existingevent'].get('startminutes') == 40 %}
+            <option value="40" selected>40</option>
+            {% else %}
+            <option value="40">40</option>
+            {% endif %}
 
 
-                {% if resp['existingevent'].get('hour') == 5 %}
-                    <option value="5" selected>5</option>
-                {% else %}
-                    <option value="5">5</option>
-                {% endif %}
+            {% if resp['existingevent'].get('startminutes') == 45 %}
+            <option value="45" selected>45</option>
+            {% else %}
+            <option value="45">45</option>
+            {% endif %}
 
 
-                {% if resp['existingevent'].get('hour') == 6 %}
-                    <option value="6" selected>6</option>
-                {% else %}
-                    <option value="6">6</option>
-                {% endif %}
+            {% if resp['existingevent'].get('startminutes') == 50 %}
+            <option value="50" selected>50</option>
+            {% else %}
+            <option value="50">50</option>
+            {% endif %}
 
 
-                {% if resp['existingevent'].get('hour') == 7 %}
-                    <option value="7" selected>7</option>
-                {% else %}
-                    <option value="7">7</option>
-                {% endif %}
+            {% if resp['existingevent'].get('startminutes') == 55 %}
+            <option value="55" selected>55</option>
+            {% else %}
+            <option value="55">55</option>
+            {% endif %}
 
+        </select>
+    </div>
+    <div class="column">
+        <label>Start AM/PM</label>
+        <select name="startampm">
+            {% if resp['existingevent'].get('startampm') == "am" %}
+            <option value="am" selected>AM</option>
+            {% else %}
+            <option value="am">AM</option>
+            {% endif %}
 
-                {% if resp['existingevent'].get('hour') == 8 %}
-                    <option value="8" selected>8</option>
-                {% else %}
-                    <option value="8">8</option>
-                {% endif %}
 
+            {% if resp['existingevent'].get('ampm') == "pm" %}
+            <option value="pm" selected>PM</option>
+            {% else %}
+            <option value="pm">PM</option>
+            {% endif %}
+        </select>
+    </div>
+    <br>
+    <div class="clearfix"></div>
+    <label>End Date</label>
+    <br>
+    <input type="text" name="enddate" id="enddate" value="{{resp['existingevent'].get('enddate')}}">
+
+    <br>
+    <div class="column">
+        <label>End Hour</label>
+        <select name="endhour">
+            {% if resp['existingevent'].get('endhour') == 1 %}
+            <option value="1" selected>1</option>
+            {% else %}
+            <option value="1">1</option>
+            {% endif %}
 
-                {% if resp['existingevent'].get('hour') == 9 %}
-                    <option value="9" selected>9</option>
-                {% else %}
-                    <option value="9">9</option>
-                {% endif %}
 
+            {% if resp['existingevent'].get('endhour') == 2 %}
+            <option value="2" selected>2</option>
+            {% else %}
+            <option value="2">2</option>
+            {% endif %}
 
-                {% if resp['existingevent'].get('hour') == 10 %}
-                    <option value="10" selected>10</option>
-                {% else %}
-                    <option value="10">10</option>
-                {% endif %}
 
+            {% if resp['existingevent'].get('endhour') == 3 %}
+            <option value="3" selected>3</option>
+            {% else %}
+            <option value="3">3</option>
+            {% endif %}
 
-                {% if resp['existingevent'].get('hour') == 11 %}
-                    <option value="11" selected>11</option>
-                {% else %}
-                    <option value="11">11</option>
-                {% endif %}
 
+            {% if resp['existingevent'].get('endhour') == 4 %}
+            <option value="4" selected>4</option>
+            {% else %}
+            <option value="4">4</option>
+            {% endif %}
 
-                {% if resp['existingevent'].get('hour') == 12 %}
-                    <option value="12" selected>12</option>
-                {% else %}
-                    <option value="12">12</option>
-                {% endif %}
 
-            </select>
+            {% if resp['existingevent'].get('endhour') == 5 %}
+            <option value="5" selected>5</option>
+            {% else %}
+            <option value="5">5</option>
+            {% endif %}
 
-            <label>start minute</label>
-            <select name="startminute">
-                {% if resp['existingevent'].get('minutes') == 0 %}
-                    <option value="0" selected>00</option>
-                {% else %}
-                    <option value="0">00</option>
-                {% endif %}
 
+            {% if resp['existingevent'].get('endhour') == 6 %}
+            <option value="6" selected>6</option>
+            {% else %}
+            <option value="6">6</option>
+            {% endif %}
 
-                {% if resp['existingevent'].get('minutes') == 5 %}
-                    <option value="5" selected>05</option>
-                {% else %}
-                    <option value="5">05</option>
-                {% endif %}
 
+            {% if resp['existingevent'].get('endhour') == 7 %}
+            <option value="7" selected>7</option>
+            {% else %}
+            <option value="7">7</option>
+            {% endif %}
 
-                {% if resp['existingevent'].get('minutes') == 10 %}
-                    <option value="10" selected>10</option>
-                {% else %}
-                    <option value="10">10</option>
-                {% endif %}
 
+            {% if resp['existingevent'].get('endhour') == 8 %}
+            <option value="8" selected>8</option>
+            {% else %}
+            <option value="8">8</option>
+            {% endif %}
 
-                {% if resp['existingevent'].get('minutes') == 15 %}
-                    <option value="15" selected>15</option>
-                {% else %}
-                    <option value="15">15</option>
-                {% endif %}
 
+            {% if resp['existingevent'].get('endhour') == 9 %}
+            <option value="9" selected>9</option>
+            {% else %}
+            <option value="9">9</option>
+            {% endif %}
 
-                {% if resp['existingevent'].get('minutes') == 20 %}
-                    <option value="20" selected>20</option>
-                {% else %}
-                    <option value="20">20</option>
-                {% endif %}
 
+            {% if resp['existingevent'].get('endhour') == 10 %}
+            <option value="10" selected>10</option>
+            {% else %}
+            <option value="10">10</option>
+            {% endif %}
 
-                {% if resp['existingevent'].get('minutes') == 25 %}
-                    <option value="25" selected>25</option>
-                {% else %}
-                    <option value="25">25</option>
-                {% endif %}
 
+            {% if resp['existingevent'].get('endhour') == 11 %}
+            <option value="11" selected>11</option>
+            {% else %}
+            <option value="11">11</option>
+            {% endif %}
 
-                {% if resp['existingevent'].get('minutes') == 30 %}
-                    <option value="30" selected>30</option>
-                {% else %}
-                    <option value="30">30</option>
-                {% endif %}
 
+            {% if resp['existingevent'].get('endhour') == 12 %}
+            <option value="12" selected>12</option>
+            {% else %}
+            <option value="12">12</option>
+            {% endif %}
 
-                {% if resp['existingevent'].get('minutes') == 35 %}
-                    <option value="35" selected>35</option>
-                {% else %}
-                    <option value="35">35</option>
-                {% endif %}
+        </select>
+    </div>
 
-
-                {% if resp['existingevent'].get('minutes') == 40 %}
-                    <option value="40" selected>40</option>
-                {% else %}
-                    <option value="40">40</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('minutes') == 45 %}
-                    <option value="45" selected>45</option>
-                {% else %}
-                    <option value="45">45</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('minutes') == 50 %}
-                    <option value="50" selected>50</option>
-                {% else %}
-                    <option value="50">50</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('minutes') == 55 %}
-                    <option value="55" selected>55</option>
-                {% else %}
-                    <option value="55">55</option>
-                {% endif %}
-
-            </select>
-
-            <label>start AM/PM</label>
-            <select name="startampm">
-                {% if resp['existingevent'].get('ampm') == "am" %}
-                    <option value="am" selected>AM</option>
-                {% else %}
-                    <option value="am">AM</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('ampm') == "pm" %}
-                    <option value="pm" selected>PM</option>
-                {% else %}
-                    <option value="pm">PM</option>
-                {% endif %}
-            </select>
-
-
-            <label>end date</label>
-            <input type="text" name="enddate" id="enddate" value="{{resp['existingevent'].get('enddate')}}">
-
-            <label>end hour</label>
-             <select name="endhour">
-                {% if resp['existingevent'].get('endhour') == 1 %}
-                    <option value="1" selected>1</option>
-                {% else %}
-                    <option value="1">1</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endhour') == 2 %}
-                    <option value="2" selected>2</option>
-                {% else %}
-                    <option value="2">2</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endhour') == 3 %}
-                    <option value="3" selected>3</option>
-                {% else %}
-                    <option value="3">3</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endhour') == 4 %}
-                    <option value="4" selected>4</option>
-                {% else %}
-                    <option value="4">4</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endhour') == 5 %}
-                    <option value="5" selected>5</option>
-                {% else %}
-                    <option value="5">5</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endhour') == 6 %}
-                    <option value="6" selected>6</option>
-                {% else %}
-                    <option value="6">6</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endhour') == 7 %}
-                    <option value="7" selected>7</option>
-                {% else %}
-                    <option value="7">7</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endhour') == 8 %}
-                    <option value="8" selected>8</option>
-                {% else %}
-                    <option value="8">8</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endhour') == 9 %}
-                    <option value="9" selected>9</option>
-                {% else %}
-                    <option value="9">9</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endhour') == 10 %}
-                    <option value="10" selected>10</option>
-                {% else %}
-                    <option value="10">10</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endhour') == 11 %}
-                    <option value="11" selected>11</option>
-                {% else %}
-                    <option value="11">11</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endhour') == 12 %}
-                    <option value="12" selected>12</option>
-                {% else %}
-                    <option value="12">12</option>
-                {% endif %}
-
-            </select>
-
-
-            <label>end minute</label>
-            <select name="endminute">
-                {% if resp['existingevent'].get('endminutes') == 0 %}
-                    <option value="0" selected>00</option>
-                {% else %}
-                    <option value="0">00</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endminutes') == 5 %}
-                    <option value="5" selected>05</option>
-                {% else %}
-                    <option value="5">05</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endminutes') == 10 %}
-                    <option value="10" selected>10</option>
-                {% else %}
-                    <option value="10">10</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endminutes') == 15 %}
-                    <option value="15" selected>15</option>
-                {% else %}
-                    <option value="15">15</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endminutes') == 20 %}
-                    <option value="20" selected>20</option>
-                {% else %}
-                    <option value="20">20</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endminutes') == 25 %}
-                    <option value="25" selected>25</option>
-                {% else %}
-                    <option value="25">25</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endminutes') == 30 %}
-                    <option value="30" selected>30</option>
-                {% else %}
-                    <option value="30">30</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endminutes') == 35 %}
-                    <option value="35" selected>35</option>
-                {% else %}
-                    <option value="35">35</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endminutes') == 40 %}
-                    <option value="40" selected>40</option>
-                {% else %}
-                    <option value="40">40</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endminutes') == 45 %}
-                    <option value="45" selected>45</option>
-                {% else %}
-                    <option value="45">45</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endminutes') == 50 %}
-                    <option value="50" selected>50</option>
-                {% else %}
-                    <option value="50">50</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endminutes') == 55 %}
-                    <option value="55" selected>55</option>
-                {% else %}
-                    <option value="55">55</option>
-                {% endif %}
-
-            </select>
-
-            <label>end AM/PM</label>
-            <select name="endampm">
-                {% if resp['existingevent'].get('endampm') == 'am' %}
-                    <option value="am" selected>AM</option>
-                {% else %}
-                    <option value="am">AM</option>
-                {% endif %}
-
-
-                {% if resp['existingevent'].get('endampm') == 'pm' %}
-                    <option value="pm" selected>PM</option>
-                {% else %}
-                    <option value="pm">PM</option>
-                {% endif %}
-            </select>
-
-            <label>category</label>
-            <select name="category">
-                {% for event_type in resp['category'] %}
-                    {% if event_type['id']==resp['existingevent'].get('categoryid') %}
-                        <option value="{{event_type['id']}}" selected>{{event_type['name']}}</option>
-                    {% else %}
-                        <option value="{{event_type['id']}}">{{event_type['name']}}</option>
-                    {% endif %}
-                {% endfor %}
-            </select>
-            <input type="submit">
-
-
-        </form>
-        <script src="../static/js/jquery.js"></script>
-        <script src="../static/js/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
-        <script>
+    <div class="column">
+        <label>End Minute</label>
+        <select name="endminute">
+            {% if resp['existingevent'].get('endminutes') == 0 %}
+            <option value="0" selected>00</option>
+            {% else %}
+            <option value="0">00</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('endminutes') == 5 %}
+            <option value="5" selected>05</option>
+            {% else %}
+            <option value="5">05</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('endminutes') == 10 %}
+            <option value="10" selected>10</option>
+            {% else %}
+            <option value="10">10</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('endminutes') == 15 %}
+            <option value="15" selected>15</option>
+            {% else %}
+            <option value="15">15</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('endminutes') == 20 %}
+            <option value="20" selected>20</option>
+            {% else %}
+            <option value="20">20</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('endminutes') == 25 %}
+            <option value="25" selected>25</option>
+            {% else %}
+            <option value="25">25</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('endminutes') == 30 %}
+            <option value="30" selected>30</option>
+            {% else %}
+            <option value="30">30</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('endminutes') == 35 %}
+            <option value="35" selected>35</option>
+            {% else %}
+            <option value="35">35</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('endminutes') == 40 %}
+            <option value="40" selected>40</option>
+            {% else %}
+            <option value="40">40</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('endminutes') == 45 %}
+            <option value="45" selected>45</option>
+            {% else %}
+            <option value="45">45</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('endminutes') == 50 %}
+            <option value="50" selected>50</option>
+            {% else %}
+            <option value="50">50</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('endminutes') == 55 %}
+            <option value="55" selected>55</option>
+            {% else %}
+            <option value="55">55</option>
+            {% endif %}
+
+        </select>
+    </div>
+    <div class="column">
+        <label>End AM/PM</label>
+        <select name="endampm">
+            {% if resp['existingevent'].get('endampm') == 'am' %}
+            <option value="am" selected>AM</option>
+            {% else %}
+            <option value="am">AM</option>
+            {% endif %}
+
+
+            {% if resp['existingevent'].get('endampm') == 'pm' %}
+            <option value="pm" selected>PM</option>
+            {% else %}
+            <option value="pm">PM</option>
+            {% endif %}
+        </select>
+    </div>
+    <br>
+    <div class="clearfix"></div>
+    <label>Category</label>
+    <br>
+    <select name="category">
+        {% for event_type in resp['category'] %}
+        {% if event_type['id']|int==resp['existingevent'].get('categoryid')|int %}
+        <option value="{{event_type['id']}}" selected>{{event_type['name']}}</option>
+        {% else %}
+        <option value="{{event_type['id']}}">{{event_type['name']}}</option>
+        {% endif %}
+        {% endfor %}
+    </select>
+    <br>
+    <br>
+    <br>
+    <input class="submit" type="submit">
+
+
+</form>
+
+<script src="../static/js/jquery.js"></script>
+<script src="../static/js/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+<script>
         	$(function() {
     		$( "#startdate" ).datepicker();
     		$( "#enddate" ).datepicker();
   			});
-  		</script>
-    </body>
+
+</script>
+</body>
 </html>

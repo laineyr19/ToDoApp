@@ -1,6 +1,26 @@
 label {
-	display: block;
-	margin: 25px 10px 0px 10px;
+	margin: 25px 10px 0px 0px;
+	font-family: 'Josefin Sans';
+}
+
+.info {
+    font-family: 'Josefin Sans';
+    width: 200px;
+    font-size: 15px;
+    padding: 1px;
+    color: black;
+}
+
+.calendar-button  {
+    font-family: 'Josefin Sans';
+    font-size: 15px;
+    color: black;
+    display: block;
+    padding: 10px 10px 0px 10px;
+}
+
+.submit {
+    font-family: 'Josefin Sans';
 }
 
 textarea {
@@ -15,4 +35,37 @@ textarea {
 #dialog p {
 	font-family: 'Josefin Sans';
 }
+
+.form-inline {
+    padding: 10px;
+}
+
+.column {
+    float: left;
+    margin: 0px 35px 0px 0px;
+}
+
+.nav-pills>li>a {
+    text-color: black;
+}
+
+nav {
+    width: 300px;
+    margin: 0 auto;
+    color: black;
+    text-color: black;
+    font-family: 'Josefin Sans';
+    cursor: auto;
+}
+
+header h1  {
+    text-align: center;
+    font-family: 'Josefin Sans';
+    font-size: 50px;
+}
+
+.active {
+    background-color: #E6E6E6;
+}
+
 

@@ -1,7 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, flash
-from flask import Flask, render_template, redirect, url_for, flash
 from flask import g
-from flask import Response
 from flask import request
 from flask import jsonify
 import json
@@ -67,6 +65,8 @@ def saving_event():
                                                                                                                                                                                title=title, description=description, starttimestamp=starttimestamp, endtimestamp=endtimestamp, category=category)
     g.cursor.execute(insert)
     g.conn.commit()
+    flash("Event Saved!")
+    return redirect(url_for('displayevent'))
     
     
 @app.route("/displayevent", methods=['GET'])
@@ -97,54 +97,52 @@ def edit_event(): #function called edit_event
         return render_template('add_event.html') #go to add_event page
 
     else: #if the event does exist,
-        query = ("SELECT id, title, description, starttime, endtime FROM ToDodb.todos where id= '{a}'".format(a=id)) #var query gets bunch of stuff from db w/ right id
+        query = ("SELECT id, title, description, starttime, endtime, categoryid FROM ToDodb.todos where id= '{a}'".format(a=id)) #var query gets bunch of stuff from db w/ right id
         result = query_db(query)
 
         #below is for starttime
 
         d = result[0]['starttime']
-        result[0]['month'] = str(d.month)
-        result[0]['day'] = d.day
-        result[0]['year'] = d.year
-        result[0]['date'] = str(d.day) + "/" + str(d.month) + "/" + str(d.year)
+        result[0]['startmonth'] = str(d.month)
+        result[0]['startday'] = d.day
+        result[0]['startyear'] = d.year
+        result[0]['startdate'] = str(d.month) + "/" + str(d.day) + "/" + str(d.year)
 
 
         if d.hour > 12: #if the hour is greater than 12 it's pm
-            result[0]['hour'] = d.hour - 12
-            result[0]['ampm'] = 'pm'
+            result[0]['starthour'] = d.hour - 12
+            result[0]['startampm'] = 'pm'
 
         else: #it's am
-            result[0]['hour'] = d.hour
-            result[0]['ampm'] = 'am'
-        result[0]['minutes'] = d.minute
+            result[0]['starthour'] = d.hour
+            result[0]['startampm'] = 'am'
+        result[0]['startminutes'] = d.minute
 
-
-        #below is for endtime
 
         e = result[0]['endtime']
         result[0]['endmonth'] = str(e.month)
         result[0]['endday'] = e.day
         result[0]['endyear'] = e.year
-        result[0]['enddate'] = str(e.day) + "/" + str(e.month) + "/" + str(e.year)
+        result[0]['enddate'] = str(e.month) + "/" + str(e.day) + "/" + str(e.year)
 
 
-        if e.hour > 12: #if the hour is greater than 12 it's pm
+        if e.hour > 12:
             result[0]['endhour'] = e.hour - 12
             result[0]['endampm'] = 'pm'
 
-        else: #it's am
+        else:
             result[0]['endhour'] = e.hour
             result[0]['endampm'] = 'am'
         result[0]['endminutes'] = e.minute
 
 
-        #return render_template('editevent.html', resp={'existingevent':existingevent[0], 'category':category, 'starttime':starttime, 'endtime':endtime,}) #rendering templates is confusing
-        return render_template('editevent.html', resp={'existingevent':result[0], 'category':category}) #rendering templates is confusing
-#return result to template the usual way
+        return render_template('editevent.html', resp={'existingevent':result[0], 'category':category})
+
 
 
 @app.route("/editevent", methods=['POST'])
 def editing_event():
+    id=request.form.get("id")
     title=request.form.get("title")
     description=request.form.get("description")
     startdate=request.form.get("startdate")
@@ -158,13 +156,26 @@ def editing_event():
     category=request.form.get("category")
     starttimestamp=datetime.strptime(startdate + " " + starthour + ":" + startminute + startampm,"%m/%d/%Y %I:%M%p")
     endtimestamp=datetime.strptime(enddate + " " + endhour + ":" + endminute + endampm,"%m/%d/%Y %I:%M%p")
-    '''insert="INSERT INTO ToDodb.todos(title, description, starttime, endtime, categoryid) VALUES ('{title}', '{description}', '{starttimestamp}', '{endtimestamp}', '{category}')".format(
-                                                                                                                                                                               title=title, description=description, starttimestamp=starttimestamp, endtimestamp=endtimestamp, category=category)
-    g.cursor.execute(insert)
+
+    query = ("UPDATE ToDodb.todos "
+             "SET title='{title}', "
+             "description='{description}', "
+             "starttime='{starttimestamp}', "
+             "endtime='{endtimestamp}', "
+             "categoryid='{category}' "
+             ""
+             "WHERE id= '{id}'"
+             .format(id=id, title=title, description=description, starttimestamp=starttimestamp, endtimestamp=endtimestamp, category=category))
+
+
+    g.cursor.execute(query)
     g.conn.commit()
-    '''
 
+    return redirect(url_for('displayevent'))
 
+@app.route("/monthlyevents", methods=['GET'])
+def monthlyevents():
+    return render_template('monthlyevents.html')
     
     
 if __name__ == "__main__":

@@ -1,116 +1,170 @@
 <!DOCTYPE html>
 <html>
-    <head>
-       <link rel="stylesheet" href="../static/css/todostyles.css">
-       <link rel="stylesheet" href="../static/css/jquery-ui.min.css">
-    </head>
-    <body>
-        <form action="saveevent" method="post">
-            <label>title</label>
-            <input type="text" name="title">
-            
-            <label>description</label>
-            <textarea name="description"></textarea>
-            
-            <label>start date</label>
-            <input type="text" name="startdate" id="startdate">
-            
-            <label>start hour</label>
-            <select name="starthour">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            </select>
-            
+<head>
+    <link rel="stylesheet" href="../static/css/todostyles.css">
+    <link rel="stylesheet" href="../static/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="../static/css/clndr.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-            <label>start minute</label>
-            <select name="startminute">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
-            <option value="25">25</option>
-            <option value="30">30</option>
-            <option value="35">35</option>
-            <option value="40">40</option>
-            <option value="45">45</option>
-            <option value="50">50</option>
-            <option value="55">55</option>
-            <option value="60">60</option>
-            </select>
-            
 
-            <label>start AM/PM</label>
-            <select name="startampm">
-            <option value="AM">AM</option>
-            <option value="PM">PM</option>
-            </select>
-            
-            <label>end date</label>
-            <input type="text" name="enddate" id="enddate">
+</head>
+<body>
 
-            <label>end hour</label>
-            <select name="endhour">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            </select>
+<header>
+    <h1>Lainey's Page</h1>
+    <nav>
+        <ul class="nav nav-pills">
+            <li>
+                <a href="displayevent">Calendar</a>
+            </li>
+            <li class="active">
+                <a href="addevent">Add Event</a>
+            </li>
+            <li>
+                <a href="monthlyevents">See Events</a>
+            </li>
+        </ul>
+    </nav>
+</header>
 
-            <label>end minute</label>
-            <select name="endminute">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
-            <option value="25">25</option>
-            <option value="30">30</option>
-            <option value="35">35</option>
-            <option value="40">40</option>
-            <option value="45">45</option>
-            <option value="50">50</option>
-            <option value="55">55</option>
-            <option value="60">60</option>
-            </select>
+<!--<form class="form-inline">
+    <div class="form-group">
+        <label for="exampleInputName2">Name</label>
+        <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail2">Email</label>
+        <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+    </div>
+    <button type="submit" class="btn btn-default">Send invitation</button>
+</form>-->
 
-            <label>end AM/PM</label>
-            <select name="endampm">
-            <option value="AM">AM</option>
-            <option value="PM">PM</option>
-            </select>
 
-            <label>category</label>
-            <select name="category">
-            	{% for event_type in resp['category'] %}
-            		<option value="{{event_type['id']}}">{{event_type['name']}}</option>
-            	{% endfor %}
-            </select>
-            <input type="submit">
-        </form>
-        <script src="../static/js/jquery.js"></script>
-        <script src="../static/js/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
-        <script>
+
+<form class="form-inline" action="saveevent" method="post">
+    <label>Title</label>
+    <br>
+    <input type="text" placeholder="Name of event..." name="title">
+
+    <br>
+
+    <label>Description</label>
+    <br>
+    <textarea name="description" placeholder="Info..."></textarea>
+
+    <br>
+
+    <label>Start Date</label>
+    <input type="text" name="startdate" id="startdate" placeholder="mm/dd/yyyy">
+
+    <label>Start Hour</label>
+    <select name="starthour">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+    </select>
+
+
+    <label>Start Minute</label>
+    <select name="startminute">
+        <option value="0">00</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+        <option value="25">25</option>
+        <option value="30">30</option>
+        <option value="35">35</option>
+        <option value="40">40</option>
+        <option value="45">45</option>
+        <option value="50">50</option>
+        <option value="55">55</option>
+    </select>
+
+
+    <label>Start AM/PM</label>
+    <select name="startampm">
+        <option value="AM">AM</option>
+        <option value="PM">PM</option>
+    </select>
+
+    <br>
+
+    <label>End Date</label>
+    <input type="text" name="enddate" id="enddate" placeholder="mm/dd/yyyy">
+
+    <label>End Hour</label>
+    <select name="endhour">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+    </select>
+
+    <label>End Minute</label>
+    <select name="endminute">
+        <option value="0">00</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+        <option value="25">25</option>
+        <option value="30">30</option>
+        <option value="35">35</option>
+        <option value="40">40</option>
+        <option value="45">45</option>
+        <option value="50">50</option>
+        <option value="55">55</option>
+    </select>
+
+    <label>End AM/PM</label>
+    <select name="endampm">
+        <option value="AM">AM</option>
+        <option value="PM">PM</option>
+    </select>
+
+    <br>
+
+    <label>Category</label>
+    <select name="category">
+        {% for event_type in resp['category'] %}
+        <option value="{{event_type['id']}}">{{event_type['name']}}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <br>
+    <br>
+    <br>
+    <input class="submit" type="submit">
+</form>
+<script src="../static/js/jquery.js"></script>
+<script src="../static/js/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+<script>
         	$(function() {
     		$( "#startdate" ).datepicker();
     		$( "#enddate" ).datepicker();
   			});
-  		</script>
-    </body>
+
+</script>
+</body>
 </html>

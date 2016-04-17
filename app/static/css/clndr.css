@@ -20,7 +20,7 @@
 	background: #C7F1FF;
 	color: #696969;
 	font-weight: bold;
-	font-family: 'Joesfin Sans';
+	font-family: 'Josefin Sans';
 
 }
 
@@ -143,7 +143,7 @@
   height: inherit;
 }
 .cal1 .clndr .clndr-table tr .day:hover {
-  background: pink;
+  background: #EBCFEB;
 }
 .cal1 .clndr .clndr-table tr .day.today,
 .cal1 .clndr .clndr-table tr .day.my-today {
@@ -151,7 +151,7 @@
 }
 .cal1 .clndr .clndr-table tr .day.today:hover,
 .cal1 .clndr .clndr-table tr .day.my-today:hover {
-  background: #9AD6E3;
+  background: #FFCEF1;
 }
 .cal1 .clndr .clndr-table tr .day.today.event,
 .cal1 .clndr .clndr-table tr .day.my-today.event {
@@ -159,11 +159,11 @@
 }
 .cal1 .clndr .clndr-table tr .day.event,
 .cal1 .clndr .clndr-table tr .day.my-event {
-  background: #B4E09F;
+  background: #D5E4FF;
 }
 .cal1 .clndr .clndr-table tr .day.event:hover,
 .cal1 .clndr .clndr-table tr .day.my-event:hover {
-  background: #96d478;
+  background: #A8A8A8;
 }
 .cal1 .clndr .clndr-table tr .day.inactive,
 .cal1 .clndr .clndr-table tr .day.my-inactive {
@@ -177,12 +177,12 @@
 	padding: 12px 0px 0px 0px;
 	font-size: 10px;
 	text-align: center;
-	background: #E9C6F7;
+	background: #C4BBE5;
 	width: 40px;
 	height: 40px;
 	border-radius: 20px 20px 20px 20px;
 	display: block;
-	color: #628057;
+	color: black;
 	font-weight: 600;
 }
 .cal1 .clndr .clndr-table tr .empty,
@@ -199,7 +199,7 @@
 .cal1 .clndr .clndr-table tr .adjacent-month:hover,
 .cal1 .clndr .clndr-table tr .my-empty:hover,
 .cal1 .clndr .clndr-table tr .my-adjacent-month:hover {
-  background: blue;
+  background: #87A6FB;
 }
 .cal1 .clndr .clndr-table tr .empty:last-child,
 .cal1 .clndr .clndr-table tr .adjacent-month:last-child,

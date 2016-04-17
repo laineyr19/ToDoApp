@@ -15,57 +15,51 @@
     <h1>Lainey's Page</h1>
     <nav>
         <ul class="nav nav-pills">
-            <li class="active">
+            <li>
                 <a href="displayevent">Calendar</a>
             </li>
             <li>
                 <a href="addevent">Add Event</a>
             </li>
-            <li>
+            <li class="active">
                 <a href="monthlyevents">See Events</a>
             </li>
         </ul>
     </nav>
 </header>
-<br>
-<br>
-
-{% with message = get_flashed_messages() %}
-    {% if messages %}
-        {% for message in messages %}
-            {{ message }}
-        {% endfor %}
-    {% endif %}
-{% endwith %}
-
-<div class="cal1">
-    <div id="calendar"></div>
-</div>
-<div id="dialog" title="Today's Events">
-
-</div>
-<script src="../static/js/underscore.js"></script>
-<script src="../static/js/moment.js"></script>
-<script src="../static/js/jquery.js"></script>
-<script src="../static/js/clndr.js"></script>
-<script src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"></script>
-
-<script type="txt/template" id="eventcontent">
-    <p>Title: {title}</p>
-    <p>Description: {description}</p>
-    <p>Start Time: {starttime}</p>
-    <p>End Time: {endtime}</p>
 
 
-    <a href="editevent?id={eventid}" class="buttontwo">Edit</a>
+    {% with message  = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
 
-    <!-- set currentevent to the event that has the edit button attatched to it.
-        when edit button  is clicked, go to addevent page and populate it with the right stuff:
-            title=title, desc=desc, etc from the data base, use var eventdetails (?)
-            -->
-</script>
-<script>
-                var firstpage = true;
+    <div class="cal1">
+        <div id="calendarevents"></div>
+    </div>
+    <div id="dialog" title="Today's Events">
+
+    </div>
+    <script src="../static/js/underscore.js"></script>
+    <script src="../static/js/moment.js"></script>
+    <script src="../static/js/jquery.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"></script>
+
+    <script type="txt/template" id="eventcontent">
+        <p>Title: {title}</p>
+        <p>Description: {description}</p>
+        <p>Start Time: {starttime}</p>
+        <p>End Time: {endtime}</p>
+
+
+        <a href="editevent?id={eventid}" class="buttontwo">Edit</a>
+
+    </script>
+    <script>
+       var firstpage = true;
                 var calendar;
                 function receivingevents(begindate, enddate) {
                     $.ajax({
@@ -84,7 +78,8 @@
                 function displayeventdata(resp) {
                     if (firstpage == true){
                         firstpage = false;
-                        calendar = $('#calendar').clndr({
+                        //calendar = $('#calendar').clndr({
+                        window.print(resp.data)
                             events : resp.data,
                             clickEvents : {
                                 click : function(target) {
@@ -132,7 +127,80 @@
                     }
                     else {
                         calendar.setEvents(resp.data);
+                        console.log("done");
                     }
+                }
+
+                /*
+                $('#calendar').clndr();
+                var d = new Date();
+                var begindate = d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + '01';
+                var enddate = d.getFullYear() + '/' + (d.getMonth() + 2) + '/' + '01';
+                receivingevents(begindate, enddate);
+
+                $(document).ready(function() {
+                    $(document).scroll(function(e) {
+
+                        if ($(".ui-widget-overlay"))//the dialog has popped up in modal view
+                        {
+                            //fix the overlay so it scrolls down with the page
+                            $(".ui-widget-overlay").css({
+                                position : 'fixed',
+                                top : '0'
+                            });
+
+                            //get the current popup position of the dialog box
+                            pos = $(".ui-dialog").position();
+
+                            //adjust the dialog box so that it scrolls as you scroll the page
+                            $(".ui-dialog").css({
+                                position : 'fixed',
+                                top : pos.y
+                */
+                            });
+                        }
+                    });
+                });
+
+
+
+
+                /*
+                var firstpage = true;
+                var calendar;
+                function receivingevents(begindate, enddate) {
+                    $.ajax({
+                        url : 'http://127.0.0.1:5000/getevents',
+                        type : 'get',
+                        data : {
+                            begindate : begindate,
+                            enddate : enddate,
+                        },
+                        success : function(data) {
+                            displayeventdata(data);
+                        }
+                    });
+                }
+
+                function displayeventdata(resp) {
+                    if (firstpage == true){
+                        firstpage = false;
+
+                    }
+                    for (var i = 0; i < resp.length; i++) {
+                                        var info = resp[i];
+                                        console.log(info, info.description, info.title, info.starttime, info.endtime, info.categoryid, info.eventid);
+                                        var eventcontent = $("#eventcontent").html();
+                                        var eventdetails = eventcontent
+                                        .replace('{title}', info.title)
+                                        .replace('{description}', info.description)
+                                        .replace('{starttime}', info.starttime)
+                                        .replace('{endtime}', info.endtime)
+                                        .replace('{eventid}', info.id);
+                                        storeevents = "<hr>" + eventdetails + storeevents;
+                                    }
+                    console.log(resp);
+
                 }
 
                 //$('#calendar').clndr();
@@ -163,8 +231,7 @@
                         }
                     });
                 });
-
-
+                */
 
 </script>
 </body>
