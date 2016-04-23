@@ -23,7 +23,7 @@ label {
     font-family: 'Josefin Sans';
 }
 
-.buttontwo {
+a.buttontwo {
 	font-family: 'Josefin Sans';
 	color: black;
 	font-size: 15px;
@@ -34,6 +34,12 @@ label {
 .buttontwo:hover {
     text-decoration: underline;
     color: black;
+}
+
+.star {
+    font-size: 6px;
+    top: -2px;
+    padding: 0 5px;
 }
 
 

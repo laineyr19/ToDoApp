@@ -41,14 +41,19 @@
 <div class="cal1">
     <div id="calendar"></div>
 </div>
-<div id="dialog" title="Today's Events">
+<div id="dialog" title="Today's Events"></div>
 
+<div id="wanttodelete" title="Delete Event?">
+    <button id="yesdelete">Yes</button>
+    <button id="nodelete">No</button>
 </div>
+
 <script src="../static/js/underscore.js"></script>
 <script src="../static/js/moment.js"></script>
 <script src="../static/js/jquery.js"></script>
 <script src="../static/js/clndr.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"></script>
+
 
 <script type="txt/template" id="eventcontent">
     <p id="eventtitlebold">{title}</p>
@@ -58,6 +63,8 @@
 
 
     <a href="editevent?id={eventid}" class="buttontwo">Edit</a>
+    <span class="glyphicon glyphicon-certificate star" aria-hidden="true"></span>
+    <a href="deleteevent?id={eventid}" class="deletebutton">Delete</a>
 
     <!-- set currentevent to the event that has the edit button attatched to it.
         when edit button  is clicked, go to addevent page and populate it with the right stuff:
@@ -80,6 +87,45 @@
                         }
                     });
                 }
+
+                function deletingevents() {
+                    $('body').on("click", ".deletebutton", function(event){
+                        console.log("event clicked");
+                        event.preventDefault();
+                        $("#wanttodelete").dialog({
+                            width : 200,
+                            modal : true
+                        });
+
+
+                    });
+                }
+               deletingevents();
+
+               function nodelete() {
+                    $('body').on("click", "#nodelete", function(event){
+                        console.log("event clicked: no");
+                        event.preventDefault();
+                        $("#wanttodelete").dialog("close");
+                    });
+                }
+                nodelete();
+
+                function yesdelete() {
+                    $('body').on("click", "#nodelete", function(event){
+                        console.log("event clicked: yes");
+                        event.preventDefault();
+                        /*$.ajax({
+                            url: urlCall + '?' + $.param({"Id": Id, "bolDeleteReq" : bolDeleteReq}),
+                            type: 'DELETE',
+                            success: callback || $.noop,
+                            error: errorCallback || $.noop
+                        });*/
+                    });
+                }
+                yesdelete();
+
+
 
                 function displayeventdata(resp) {
                     if (firstpage == true){
@@ -108,6 +154,7 @@
                                         .replace('{eventid}', info.id);
                                         storeevents = "<hr>" + eventdetails + storeevents;
                                     }
+
                                     storeevents=storeevents+"<hr>";
                                     $("#dialog").html(storeevents);
                                     $("#dialog").dialog({

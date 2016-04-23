@@ -176,6 +176,10 @@ def editing_event():
 @app.route("/monthlyevents", methods=['GET'])
 def monthlyevents():
     return render_template('monthlyevents.html')
+
+@app.route("/deleteevent", methods=['DELETE'])
+def deletingevent():
+    id = request.args.get('id')
     
     
 if __name__ == "__main__":
