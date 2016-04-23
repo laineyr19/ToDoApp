@@ -23,6 +23,20 @@ label {
     font-family: 'Josefin Sans';
 }
 
+.buttontwo {
+	font-family: 'Josefin Sans';
+	color: black;
+	font-size: 15px;
+	font-weight: 700;
+	border: none;
+}
+
+.buttontwo:hover {
+    text-decoration: underline;
+    color: black;
+}
+
+
 textarea {
 	width: 200px;
 	height: 50px;
@@ -36,6 +50,10 @@ textarea {
 	font-family: 'Josefin Sans';
 }
 
+#dialog title {
+    color: red;
+}
+
 .form-inline {
     padding: 10px;
 }
@@ -46,11 +64,11 @@ textarea {
 }
 
 .nav-pills>li>a {
-    text-color: black;
+    color: black;
 }
 
 nav {
-    width: 300px;
+    width: 265px;
     margin: 0 auto;
     color: black;
     text-color: black;
@@ -68,4 +86,23 @@ header h1  {
     background-color: #E6E6E6;
 }
 
+.see_current_events {
+    width: 500px;
+    margin: auto;
+}
 
+hr {
+    background: #9E9E9E;
+    height: 1px;
+    border: none;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover {
+    background-color: #B0BCDE;
+    color: black;
+}
+
+#eventtitlebold {
+    font-size: 20px;
+    font-weight: bolder;
+}

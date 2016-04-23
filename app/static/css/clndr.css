@@ -14,10 +14,19 @@
 	font-size: 17px;
 }
 
+.buttontwo:hover {
+    text-decoration: underline;
+}
+
+#dialog {
+    font-family: 'Josefin Sans';
+}
+
+
 .ui-dialog-titlebar.ui-corner-all.ui-widget-header.ui-helper-clearfix.ui-draggable-handle
 	{
-	border: 1px solid #9DBCC7;
-	background: #C7F1FF;
+	border: 1px solid #a9a9a9;
+	background: #CDDFFE;
 	color: #696969;
 	font-weight: bold;
 	font-family: 'Josefin Sans';
@@ -155,7 +164,7 @@
 }
 .cal1 .clndr .clndr-table tr .day.today.event,
 .cal1 .clndr .clndr-table tr .day.my-today.event {
-  background: #a7dbc1;
+  background: #a2c6db;
 }
 .cal1 .clndr .clndr-table tr .day.event,
 .cal1 .clndr .clndr-table tr .day.my-event {
