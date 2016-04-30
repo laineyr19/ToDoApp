@@ -180,7 +180,14 @@ def monthlyevents():
 @app.route("/deleteevent", methods=['DELETE'])
 def deletingevent():
     id = request.args.get('id')
-    
+    query = ("DELETE from ToDodb.todos "
+             "WHERE id= '{id}'"
+             .format(id=id))
+
+    g.cursor.execute(query)
+    g.conn.commit()
+
+    return jsonify({'success': True})
     
 if __name__ == "__main__":
   app.run(debug=True)

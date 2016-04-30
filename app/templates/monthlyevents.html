@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../static/css/clndr.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0-beta.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
           integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/css/todostyles.css">
+    <link rel="stylesheet" href="../static/css/clndr.css">
 </head>
 <body>
 
@@ -40,24 +40,72 @@
     <div class="see_current_events">
         <div id="calendarevents"></div>
     </div>
-    <div id="dialog" title="Today's Events">
+    <div id="dialog" title="Today's Events"></div>
 
+    <div id="wanttodelete" class="hidething" title="Delete Event?">
+    <button id="yesdelete">Yes</button>
+    <button id="nodelete">No</button>
     </div>
+
     <script src="../static/js/underscore.js"></script>
     <script src="../static/js/moment.js"></script>
     <script src="../static/js/jquery.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"></script>
 
     <script type="txt/template" id="eventcontent">
-        <p>Title: {title}</p>
-        <p>Description: {description}</p>
+        <p class="eventtitle">{title}</p>
+        <p>{description}</p>
         <p>Start Time: {starttime}</p>
         <p>End Time: {endtime}</p>
 
 
         <a href="editevent?id={eventid}" class="buttontwo">Edit</a>
+        <span class="glyphicon glyphicon-certificate star" aria-hidden="true"></span>
+        <a href="deleteevent?id={eventid}" id="buttontodelete2" class="deletebutton">Delete</a>
 
     </script>
+
+    <script>
+
+        function deletingevents() {
+            $('body').on("click", ".deletebutton", function(event){
+                console.log("event clicked");
+                event.preventDefault();
+                $("#wanttodelete").dialog({
+                    width : 200,
+                    modal : true
+                });
+
+
+            });
+        }
+        deletingevents();
+
+        function nodelete() {
+            $('body').on("click", "#nodelete", function(event){
+                console.log("event clicked: no");
+                event.preventDefault();
+                $("#wanttodelete").dialog("close");
+            });
+        }
+        nodelete();
+
+        function yesdelete() {
+            $('body').on("click", "#nodelete", function(event){
+                console.log("event clicked: yes");
+                event.preventDefault();
+                /*$.ajax({
+                    url: urlCall + '?' + $.param({"Id": Id, "bolDeleteReq" : bolDeleteReq}),
+                    type: 'DELETE',
+                    success: callback || $.noop,
+                    error: errorCallback || $.noop
+                });*/
+            });
+        }
+        yesdelete();
+
+    </script>
+
     <script src="../static/js/monthlyevents.js"></script>
 </body>
 </html>

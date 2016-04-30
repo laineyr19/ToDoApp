@@ -38,13 +38,13 @@
     {% endif %}
 {% endwith %}
 
-<div class="cal1">
+<div class="cal1 calendarmargin">
     <div id="calendar"></div>
 </div>
 <div id="dialog" title="Today's Events"></div>
 
-<div id="wanttodelete" title="Delete Event?">
-    <button id="yesdelete">Yes</button>
+<div id="wanttodelete" class="hidething" title="Delete Event?">
+    <button id="yesdelete" >Yes</button>
     <button id="nodelete">No</button>
 </div>
 
@@ -56,7 +56,7 @@
 
 
 <script type="txt/template" id="eventcontent">
-    <p id="eventtitlebold">{title}</p>
+    <p class="eventtitle">{title}</p>
     <p>{description}</p>
     <p>Start Time: {starttime}</p>
     <p>End Time: {endtime}</p>
@@ -64,7 +64,7 @@
 
     <a href="editevent?id={eventid}" class="buttontwo">Edit</a>
     <span class="glyphicon glyphicon-certificate star" aria-hidden="true"></span>
-    <a href="deleteevent?id={eventid}" class="deletebutton">Delete</a>
+    <a href="deleteevent" data-id="{deleteid}" id="buttontodelete" class="deletebutton">Delete</a>
 
     <!-- set currentevent to the event that has the edit button attatched to it.
         when edit button  is clicked, go to addevent page and populate it with the right stuff:
@@ -95,7 +95,7 @@
                         $("#wanttodelete").dialog({
                             width : 200,
                             modal : true
-                        });
+                        }).data("deleteid", $(this).data("id"));
 
 
                     });
@@ -112,15 +112,19 @@
                 nodelete();
 
                 function yesdelete() {
-                    $('body').on("click", "#nodelete", function(event){
+                    $('body').on("click", "#yesdelete", function(event){
                         console.log("event clicked: yes");
+                        var deleteeventid = $("#wanttodelete").data("deleteid");
                         event.preventDefault();
-                        /*$.ajax({
-                            url: urlCall + '?' + $.param({"Id": Id, "bolDeleteReq" : bolDeleteReq}),
+                        $.ajax({
+                            url: 'http://127.0.0.1:5000/deleteevent' + '?id=' + deleteeventid,
                             type: 'DELETE',
-                            success: callback || $.noop,
-                            error: errorCallback || $.noop
-                        });*/
+                            success: function(){
+                                console.log("hello");
+                                $("#wanttodelete").dialog("close");
+                                location.reload();
+                            }
+                        });
                     });
                 }
                 yesdelete();
@@ -151,7 +155,8 @@
                                         .replace('{description}', info.description)
                                         .replace('{starttime}', info.starttime)
                                         .replace('{endtime}', info.endtime)
-                                        .replace('{eventid}', info.id);
+                                        .replace('{eventid}', info.id)
+                                        .replace('{deleteid}', info.id);
                                         storeevents = "<hr>" + eventdetails + storeevents;
                                     }
 

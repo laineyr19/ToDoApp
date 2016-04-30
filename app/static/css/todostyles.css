@@ -108,7 +108,37 @@ hr {
     color: black;
 }
 
-#eventtitlebold {
+.eventtitle {
     font-size: 20px;
     font-weight: bolder;
+    font-family: 'Josefin Sans';
+}
+
+#buttontodelete {
+	font-weight: 700;
+	color: black;
+}
+
+#buttontodelete:hover {
+	font-weight: 700;
+	color: black;
+}
+
+#buttontodelete2 {
+	font-weight: 700;
+	color: black;
+	font-family: 'Josefin Sans';
+}
+
+#buttontodelete2:hover {
+	font-weight: 700;
+	color: black;
+}
+
+.calendarmargin {
+    margin-bottom: 110px;
+}
+
+.hidething {
+    display: none;
 }
